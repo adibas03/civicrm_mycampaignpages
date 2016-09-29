@@ -7,10 +7,4 @@
     <access_arguments>access CiviCRM</access_arguments>
     <title>Personal Campaigns</title>
   </item>
-  <item>
-    <path>civicrm/mycampaignpages/review</path>
-    <page_callback>CRM_mycampaignpages_Page_Review</page_callback>
-    <access_arguments>access CiviCRM</access_arguments>
-    <title>Review Campaign</title>
-  </item>
 </menu>
