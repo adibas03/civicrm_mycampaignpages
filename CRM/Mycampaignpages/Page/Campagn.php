@@ -1,5 +1,5 @@
 <?php
-require_once 'CRM/Mycampaignpages/DAO/PcpHelper.php';
+require_once 'CRM/Mycampaignpages/BAO/PcpHelper.php';
 require_once 'CRM/Core/Page.php';
 
 class CRM_Mycampaignpages_Page_Campagn extends CRM_Core_Page {
@@ -8,23 +8,11 @@ class CRM_Mycampaignpages_Page_Campagn extends CRM_Core_Page {
     // Example: Set the page-title dynamically; alternatively, declare a static title in xml/Menu/*.xml
     CRM_Utils_System::setTitle(ts('My personal Campaigns'));
 
-    /*
-    // Example: Assign a variable for use in a template
-    $this->assign('currentTime', date('Y-m-d H:i:s'));
-    */
-
-
     $contact = civicrm_api3('Contact', 'get', array(
         'sequential' => 1,
         'email' => $GLOBALS['user']->mail,
         'return' => 'id'
     ));
-
-    /*
-    $groupresult = civicrm_api3('GroupContact', 'get', array(
-        'sequential' => 1,
-        'contact_id' => $contactresult['values'][0]['contact_id'],
-    ));*/
 
     //Confirm that contact info was loaded
     if(is_array($contact) && isset($contact['is_error']) && !$contact['is_error']){
@@ -50,7 +38,7 @@ class CRM_Mycampaignpages_Page_Campagn extends CRM_Core_Page {
             CRM_Core_DAO::commonRetrieve('CRM_PCP_DAO_PCP', $prms, $pcpInfo);
             $pcps[$p]['goal_amount'] = number_format($pcps[$p]['goal_amount'], 2);
             $pcps[$p]['raised'] = number_format(floatval(CRM_PCP_BAO_PCP::thermoMeter($pcpInfo['id'])), 2);
-            $pcps[$p]['contributors'] = CRM_mycampaignpages_DAO_PcpHelper::countContributors($pcps[$p]['id']);
+            $pcps[$p]['contributors'] = CRM_mycampaignpages_BAO_PcpHelper::countContributors($pcps[$p]['id']);
 
           if ($pcps[$p]['page_type'] == 'contribute') {
             $parent_type = 'contribution_page';

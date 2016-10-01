@@ -5,7 +5,7 @@
  * Date: 9/27/2016
  * Time: 7:26 PM
  */
-class CRM_mycampaignpages_DAO_PcpHelper extends CRM_Core_DAO {
+class CRM_mycampaignpages_BAO_PcpHelper extends CRM_Core_DAO {
 
 
         /**
