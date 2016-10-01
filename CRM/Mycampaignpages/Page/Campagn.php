@@ -27,7 +27,7 @@ class CRM_Mycampaignpages_Page_Campagn extends CRM_Core_Page {
           ));
         }
         catch(Exception $e){
-          $pcps = ['values'=>[]];
+          $pcp = ['values'=>[]];
         }
 
         if(is_array($pcp) && isset($pcp['is_error']) &&!$pcp['is_error']){

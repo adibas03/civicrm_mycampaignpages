@@ -3,7 +3,7 @@
 <menu>
   <item>
     <path>civicrm/mycampaignpages</path>
-    <page_callback>CRM_mycampaignpages_Page_Campagn</page_callback>
+    <page_callback>CRM_Mycampaignpages_Page_Campagn</page_callback>
     <access_arguments>access CiviCRM</access_arguments>
     <title>Personal Campaigns</title>
   </item>
