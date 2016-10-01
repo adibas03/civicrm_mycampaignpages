@@ -145,9 +145,10 @@ function mycampaignpages_civicrm_preProcess($formName, &$form) {
 function mycampaignpages_civicrm_navigationMenu(&$params) {
 
   // get the id of Administer Menu
-  $administerMenuId = CRM_Core_DAO::getFieldValue('CRM_Core_BAO_Navigation', 'Administer', 'id', 'name');
-  $administerMenuId = $administerMenuId?$administerMenuId:2;
-  $contactMenuId = CRM_Core_DAO::getFieldValue('CRM_Core_BAO_Navigation', 'Campaigns', 'id', 'name');
+  $contributionMenuId = CRM_Core_DAO::getFieldValue('CRM_Core_BAO_Navigation', 'Contributions', 'id', 'name');
+  //$administerMenuId = $administerMenuId?$administerMenuId:2;
+  $eventMenuId = CRM_Core_DAO::getFieldValue('CRM_Core_BAO_Navigation', 'Events', 'id', 'name');
+  $campaignMenuId = CRM_Core_DAO::getFieldValue('CRM_Core_BAO_Navigation', 'Campaigns', 'id', 'name');
 
   // get the maximum key of $params
   $maxKey = ( max( array_keys($params) ) );
@@ -160,13 +161,19 @@ function mycampaignpages_civicrm_navigationMenu(&$params) {
           'permission' => null,
           'operator'   => null,
           'separator'  => true,
-          'parentID'   => $params[$contactMenuId],
+          'parentID'   => $params[$contributionMenuId],
           'navID'      => $maxKey+1,
           'active'     => 1
       )
   );
 
-  $params[$contactMenuId]['child'][++$maxKey] = $menu_data;
+  if($contributionMenuId)$params[$contributionMenuId]['child'][++$maxKey] = $menu_data;
+
+  $menu_data['attributes']['parentID'] = $eventMenuId;
+  if($eventMenuId)$params[$eventMenuId]['child'][++$maxKey] = $menu_data;
+  
+  $menu_data['attributes']['parentID'] = $campaignMenuId;
+  if($campaignMenuId)$params[$campaignMenuId]['child'][++$maxKey] = $menu_data;
 
  // $params[$administerMenuId]['child'][++$maxKey] = $menu_data;
 
